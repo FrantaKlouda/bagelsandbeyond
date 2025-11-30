@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Staff Portal – Bagels & Beyond</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .staff-portal {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f3ece3;
+            padding: 20px;
+        }
+        .staff-container {
+            background: #fffaf3;
+            border-radius: 20px;
+            padding: 40px 50px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            border: 1px solid #f3e8dc;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+        .staff-header {
+            margin-bottom: 30px;
+        }
+        .staff-header h1 {
+            font-size: 2rem;
+            color: #8a6540;
+            margin-bottom: 8px;
+        }
+        .staff-header p {
+            font-size: 1rem;
+            color: #7a6a5d;
+        }
+        .staff-options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-top: 24px;
+        }
+        .staff-card {
+            background: #f8f2ea;
+            border-radius: 16px;
+            padding: 24px 20px;
+            border: 1px solid #e0d6c8;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .staff-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(200,139,90,0.15);
+        }
+        .staff-card h2 {
+            font-size: 1.3rem;
+            color: #8a6540;
+            margin-bottom: 8px;
+        }
+        .staff-card p {
+            font-size: 0.95rem;
+            color: #7a6a5d;
+            margin: 0;
+        }
+        @media (max-width: 600px) {
+            .staff-container {
+                padding: 30px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="staff-portal">
+    <div class="staff-container">
+        <div class="staff-header">
+            <h1>Staff Portal</h1>
+            <p>Bagels &amp; Beyond Management System</p>
+        </div>
+        
+        <div class="staff-options">
+            <a href="orders.html" class="staff-card">
+                <h2>📋 Order Management</h2>
+                <p>View and manage customer orders in real-time</p>
+            </a>
+            
+            <a href="inventory.html" class="staff-card">
+                <h2>📦 Inventory Management</h2>
+                <p>Track stock levels and manage product inventory</p>
+            </a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

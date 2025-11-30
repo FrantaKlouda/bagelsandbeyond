@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Management – Staff Portal</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="staff-orders.css">
+</head>
+<body>
+
+<div class="staff-page">
+    <div class="staff-header">
+        <h1>📋 Order Management System</h1>
+        <a href="index.html">← Back to Staff Portal</a>
+    </div>
+
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-number" id="stat-total">0</div>
+            <div class="stat-label">Total Orders</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" id="stat-pending">0</div>
+            <div class="stat-label">Pending</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" id="stat-preparing">0</div>
+            <div class="stat-label">Preparing</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" id="stat-ready">0</div>
+            <div class="stat-label">Ready</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" id="stat-completed">0</div>
+            <div class="stat-label">Completed</div>
+        </div>
+    </div>
+
+    <div class="filters">
+        <span class="filter-label">Filter:</span>
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="pending">Pending</button>
+        <button class="filter-btn" data-filter="preparing">Preparing</button>
+        <button class="filter-btn" data-filter="ready">Ready</button>
+        <button class="filter-btn" data-filter="completed">Completed</button>
+    </div>
+
+    <div class="orders-layout">
+        <div class="orders-list-container">
+            <h2>Orders</h2>
+            <div id="orders-list"></div>
+        </div>
+        
+        <div class="order-details-panel" id="order-details-panel">
+            <div class="no-selection">
+                <p>Select an order to view details</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="staff-orders.js"></script>
+</body>
+</html>

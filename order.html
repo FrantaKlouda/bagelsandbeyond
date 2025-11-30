@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Online – Bagels & Beyond</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="order-page">
+
+<div class="order-wrapper">
+    <div class="order-topbar">
+        <div>
+            <h1>Bagels & Beyond</h1>
+            <p>Order your favorite bagels online</p>
+        </div>
+        <div class="order-cart">
+            🛒 Cart (<span id="cart-count">0</span>)
+        </div>
+    </div>
+
+    <div class="order-layout">
+        <!-- Menu Items -->
+        <div class="menu-section">
+            <h2 style="margin-top:20px;color:#8a6540;">Bagels</h2>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div><strong>Plain Bagel</strong></div>
+                    <p class="item-desc">Classic plain bagel</p>
+                    <div class="item-bottom">
+                        <span><strong>$2.50</strong></span>
+                        <button onclick="addToCart('Plain Bagel', 2.50)">Add</button>
+                    </div>
+                </div>
+
+                <div class="item-card">
+                    <div><strong>Everything Bagel</strong></div>
+                    <p class="item-desc">With sesame and poppy seeds</p>
+                    <div class="item-bottom">
+                        <span><strong>$3.25</strong></span>
+                        <button onclick="addToCart('Everything Bagel', 3.25)">Add</button>
+                    </div>
+                </div>
+
+                <div class="item-card">
+                    <div><strong>Sesame Bagel</strong></div>
+                    <p class="item-desc">Covered in sesame seeds</p>
+                    <div class="item-bottom">
+                        <span><strong>$2.75</strong></span>
+                        <button onclick="addToCart('Sesame Bagel', 2.75)">Add</button>
+                    </div>
+                </div>
+
+                <div class="item-card">
+                    <div><strong>Blueberry Bagel</strong></div>
+                    <p class="item-desc">With real blueberries</p>
+                    <div class="item-bottom">
+                        <span><strong>$3.00</strong></span>
+                        <button onclick="addToCart('Blueberry Bagel', 3.00)">Add</button>
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="margin-top:20px;color:#8a6540;">Beverages</h2>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div><strong>Coffee – Small</strong></div>
+                    <p class="item-desc">Freshly brewed</p>
+                    <div class="item-bottom">
+                        <span><strong>$2.50</strong></span>
+                        <button onclick="addToCart('Coffee – Small', 2.50)">Add</button>
+                    </div>
+                </div>
+
+                <div class="item-card">
+                    <div><strong>Iced Coffee – Large</strong></div>
+                    <p class="item-desc">Served over ice</p>
+                    <div class="item-bottom">
+                        <span><strong>$3.25</strong></span>
+                        <button onclick="addToCart('Iced Coffee – Large', 3.25)">Add</button>
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="margin-top:20px;color:#8a6540;">Spreads</h2>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div><strong>Cream Cheese – Plain</strong></div>
+                    <p class="item-desc">Smooth cream cheese</p>
+                    <div class="item-bottom">
+                        <span><strong>$1.25</strong></span>
+                        <button onclick="addToCart('Cream Cheese – Plain', 1.25)">Add</button>
+                    </div>
+                </div>
+
+                <div class="item-card">
+                    <div><strong>Cream Cheese – Veggie</strong></div>
+                    <p class="item-desc">With chopped vegetables</p>
+                    <div class="item-bottom">
+                        <span><strong>$1.50</strong></span>
+                        <button onclick="addToCart('Cream Cheese – Veggie', 1.50)">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cart Sidebar -->
+        <div class="cart-sidebar">
+            <h3 style="margin-bottom:16px;">Your Cart</h3>
+            <div id="cart-items"></div>
+            <div id="cart-total" style="margin-top:16px;padding-top:16px;border-top:2px solid #e0d6c8;"></div>
+            <a href="payment.html" class="btn" style="display:block;text-align:center;margin-top:16px;">Proceed to Checkout</a>
+            <button onclick="clearCart()" class="btn btn-secondary" style="width:100%;margin-top:8px;">Clear Cart</button>
+        </div>
+    </div>
+</div>
+
+<a href="index.html" class="footer-right-link">← Back to Home</a>
+
+<script src="cart.js"></script>
+</body>
+</html>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventory Management – Staff Portal</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        body {
+            background: #f3ece3;
+        }
+        .staff-page {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px 20px;
+        }
+        .staff-header {
+            background: #8a6540;
+            color: #fff;
+            padding: 20px 24px;
+            border-radius: 14px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .staff-header h1 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        .staff-header a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .stat-card {
+            background: #fffaf3;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #f3e8dc;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #8a6540;
+        }
+        .stat-label {
+            font-size: 0.9rem;
+            color: #7a6a5d;
+            margin-top: 4px;
+        }
+        .inventory-container {
+            background: #fffaf3;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid #f3e8dc;
+        }
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 14px;
+            margin-top: 16px;
+        }
+        .inventory-item {
+            background: #f8f2ea;
+            border-radius: 12px;
+            padding: 16px 18px;
+            border: 1px solid #e0d6c8;
+        }
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .item-name {
+            font-weight: 700;
+            color: #8a6540;
+            font-size: 1.05rem;
+        }
+        .item-icon {
+            font-size: 1.5rem;
+        }
+        .item-stock-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .stock-level {
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+        }
+        .stock-level.low {
+            background: #ffeaa7;
+            color: #5d4833;
+        }
+        .stock-level.ok {
+            background: #d4edda;
+            color: #155724;
+        }
+        .stock-level.out {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .stock-controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-top: 8px;
+        }
+        .stock-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid #d2c4b5;
+            background: #e2d3c5;
+            color: #8a6540;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .stock-btn:hover {
+            background: #d2c4b5;
+        }
+        .stock-input {
+            width: 60px;
+            height: 32px;
+            text-align: center;
+            border-radius: 8px;
+            border: 1px solid #d2c4b5;
+            font-size: 0.95rem;
+            background: #fff;
+            color: #8a6540;
+            font-weight: 600;
+        }
+        .restock-btn {
+            padding: 6px 12px;
+            border-radius: 999px;
+            border: none;
+            background: #c48b5a;
+            color: #fff;
+            font-size: 0.85rem;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 8px;
+            width: 100%;
+        }
+        .restock-btn:hover {
+            background: #aa7547;
+        }
+        .filters {
+            background: #f8f2ea;
+            border-radius: 12px;
+            padding: 12px 16px;
+            border: 1px solid #e0d6c8;
+            margin-bottom: 16px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 6px 14px;
+            border-radius: 999px;
+            border: 1px solid #e0d6c8;
+            background: #fffaf3;
+            color: #8a6540;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+        .filter-btn.active {
+            background: #8a6540;
+            color: #fff;
+            border-color: #8a6540;
+        }
+    </style>
+</head>
+<body>
+
+<div class="staff-page">
+    <div class="staff-header">
+        <h1>📦 Inventory Management System</h1>
+        <a href="index.html">← Back to Staff Portal</a>
+    </div>
+
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-number" id="stat-total">0</div>
+            <div class="stat-label">Total Items</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" id="stat-low">0</div>
+            <div class="stat-label">Low Stock</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" id="stat-out">0</div>
+            <div class="stat-label">Out of Stock</div>
+        </div>
+    </div>
+
+    <div class="filters">
+        <span style="font-weight:600;color:#8a6540;">Filter:</span>
+        <button class="filter-btn active" data-filter="all">All Items</button>
+        <button class="filter-btn" data-filter="low">Low Stock</button>
+        <button class="filter-btn" data-filter="out">Out of Stock</button>
+    </div>
+
+    <div class="inventory-container">
+        <h2 style="margin-bottom:16px;color:#8a6540;">Current Inventory</h2>
+        <div class="inventory-grid" id="inventory-grid"></div>
+    </div>
+</div>
+
+<script>
+    var inventory = [];
+    var currentFilter = 'all';
+
+    function initInventory() {
+        var storedInventory = localStorage.getItem('inventory');
+        if (storedInventory) {
+            inventory = JSON.parse(storedInventory);
+        } else {
+            // Default inventory
+            inventory = [
+                { id: 1, name: 'Plain Bagel', icon: '🍩', stock: 45, lowThreshold: 15 },
+                { id: 2, name: 'Everything Bagel', icon: '🍩', stock: 38, lowThreshold: 15 },
+                { id: 3, name: 'Sesame Bagel', icon: '🍩', stock: 12, lowThreshold: 15 },
+                { id: 4, name: 'Cinnamon Raisin Bagel', icon: '🍩', stock: 28, lowThreshold: 15 },
+                { id: 5, name: 'Blueberry Bagel', icon: '🍩', stock: 22, lowThreshold: 15 },
+                { id: 6, name: 'Cream Cheese – Plain', icon: '🧈', stock: 8, lowThreshold: 10 },
+                { id: 7, name: 'Cream Cheese – Veggie', icon: '🧈', stock: 15, lowThreshold: 10 },
+                { id: 8, name: 'Coffee – Small', icon: '☕', stock: 50, lowThreshold: 20 },
+                { id: 9, name: 'Iced Coffee – Large', icon: '🥤', stock: 0, lowThreshold: 20 },
+                { id: 10, name: 'Hash Brown', icon: '🥔', stock: 35, lowThreshold: 20 },
+                { id: 11, name: 'Side Salad', icon: '🥗', stock: 18, lowThreshold: 10 }
+            ];
+        }
+        saveInventory();
+        updateStats();
+        renderInventory();
+    }
+
+    function saveInventory() {
+        localStorage.setItem('inventory', JSON.stringify(inventory));
+    }
+
+    function updateStats() {
+        var total = inventory.length;
+        var low = 0;
+        var out = 0;
+        for (var i = 0; i < inventory.length; i++) {
+            var item = inventory[i];
+            if (item.stock === 0) {
+                out++;
+            } else if (item.stock > 0 && item.stock <= item.lowThreshold) {
+                low++;
+            }
+        }
+        document.getElementById('stat-total').textContent = total;
+        document.getElementById('stat-low').textContent = low;
+        document.getElementById('stat-out').textContent = out;
+    }
+
+    function getStockStatus(item) {
+        if (item.stock === 0) return 'out';
+        if (item.stock <= item.lowThreshold) return 'low';
+        return 'ok';
+    }
+
+    function getStockLabel(item) {
+        if (item.stock === 0) return 'Out of Stock';
+        if (item.stock <= item.lowThreshold) return 'Low: ' + item.stock + ' units';
+        return item.stock + ' units';
+    }
+
+    function renderInventory() {
+        var grid = document.getElementById('inventory-grid');
+        var filtered = [];
+
+        for (var i = 0; i < inventory.length; i++) {
+            var item = inventory[i];
+            if (currentFilter === 'all') {
+                filtered.push(item);
+            } else if (currentFilter === 'low' && item.stock > 0 && item.stock <= item.lowThreshold) {
+                filtered.push(item);
+            } else if (currentFilter === 'out' && item.stock === 0) {
+                filtered.push(item);
+            }
+        }
+
+        if (filtered.length === 0) {
+            grid.innerHTML = '<p style="text-align:center;padding:40px;color:#7a6a5d;">No items found for this filter.</p>';
+            return;
+        }
+
+        var html = '';
+        for (var j = 0; j < filtered.length; j++) {
+            var it = filtered[j];
+            var status = getStockStatus(it);
+            var label = getStockLabel(it);
+
+            html += '<div class="inventory-item">';
+            html += '<div class="item-header">';
+            html += '<span class="item-name">' + it.name + '</span>';
+            html += '<span class="item-icon">' + it.icon + '</span>';
+            html += '</div>';
+            html += '<div class="item-stock-row">';
+            html += '<span style="font-size:0.9rem;color:#7a6a5d;">Stock:</span>';
+            html += '<span class="stock-level ' + status + '">' + label + '</span>';
+            html += '</div>';
+            html += '<div class="stock-controls">';
+            html += '<button class="stock-btn" onclick="updateStock(' + it.id + ', -5)">-5</button>';
+            html += '<button class="stock-btn" onclick="updateStock(' + it.id + ', -1)">−</button>';
+            html += '<input type="number" class="stock-input" value="' + it.stock + '" onchange="setStock(' + it.id + ', this.value)" min="0">';
+            html += '<button class="stock-btn" onclick="updateStock(' + it.id + ', 1)">+</button>';
+            html += '<button class="stock-btn" onclick="updateStock(' + it.id + ', 5)">+5</button>';
+            html += '</div>';
+            html += '<button class="restock-btn" onclick="restock(' + it.id + ')">Quick Restock (+50)</button>';
+            html += '</div>';
+        }
+
+        grid.innerHTML = html;
+    }
+
+    function updateStock(id, delta) {
+        for (var i = 0; i < inventory.length; i++) {
+            if (inventory[i].id === id) {
+                inventory[i].stock = Math.max(0, inventory[i].stock + delta);
+                break;
+            }
+        }
+        saveInventory();
+        updateStats();
+        renderInventory();
+    }
+
+    function setStock(id, value) {
+        var newStock = parseInt(value, 10);
+        if (isNaN(newStock) || newStock < 0) {
+            renderInventory();
+            return;
+        }
+        for (var i = 0; i < inventory.length; i++) {
+            if (inventory[i].id === id) {
+                inventory[i].stock = newStock;
+                break;
+            }
+        }
+        saveInventory();
+        updateStats();
+        renderInventory();
+    }
+
+    function restock(id) {
+        for (var i = 0; i < inventory.length; i++) {
+            if (inventory[i].id === id) {
+                inventory[i].stock = inventory[i].stock + 50;
+                break;
+            }
+        }
+        saveInventory();
+        updateStats();
+        renderInventory();
+    }
+
+    // Filter buttons
+    var invFilterBtns = document.querySelectorAll('.filter-btn');
+    for (var i = 0; i < invFilterBtns.length; i++) {
+        invFilterBtns[i].addEventListener('click', function () {
+            for (var j = 0; j < invFilterBtns.length; j++) {
+                invFilterBtns[j].classList.remove('active');
+            }
+            this.classList.add('active');
+            currentFilter = this.getAttribute('data-filter');
+            renderInventory();
+        });
+    }
+
+    window.addEventListener('DOMContentLoaded', initInventory);
+</script>
+
+</body>
+</html>
