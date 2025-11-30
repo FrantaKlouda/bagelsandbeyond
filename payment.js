@@ -92,6 +92,9 @@ if (form) {
         // Get card last 4 digits
         var cardNumber = document.getElementById('cardNumber').value;
         var lastFour = cardNumber.replace(/\s/g, '').slice(-4);
+
+        // Get pickup time
+        var pickupTimeValue = document.getElementById('pickupTime').value; // "HH:MM"
         
         // Create order info
         var orderNumber = 'BB-' + Math.floor(1000 + Math.random() * 9000);
@@ -101,6 +104,7 @@ if (form) {
             lastName: document.getElementById('lastName').value,
             phone: document.getElementById('phone').value,
             date: new Date().toISOString().slice(0, 10),
+            pickupTime: pickupTimeValue,              // <-- new
             cart: cart,
             subtotal: subtotal.toFixed(2),
             tax: tax.toFixed(2),
@@ -120,6 +124,7 @@ if (form) {
             lastName: orderInfo.lastName,
             phone: orderInfo.phone,
             date: orderInfo.date,
+            pickupTime: orderInfo.pickupTime,       // <-- new
             total: parseFloat(orderInfo.total),
             status: 'pending',
             cart: orderInfo.cart

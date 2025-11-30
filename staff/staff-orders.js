@@ -50,6 +50,7 @@ function getSampleOrders() {
             lastName: 'Smith',
             phone: '(555) 123-4567',
             date: '2025-01-15',
+            pickupTime: '08:15',           // added
             total: 15.43,
             status: 'pending',
             cart: [
@@ -64,6 +65,7 @@ function getSampleOrders() {
             lastName: 'Johnson',
             phone: '(555) 987-6543',
             date: '2025-01-15',
+            pickupTime: '09:00',           // added
             total: 8.67,
             status: 'ready',
             cart: [
@@ -77,6 +79,7 @@ function getSampleOrders() {
             lastName: 'Brown',
             phone: '(555) 456-7890',
             date: '2025-01-15',
+            pickupTime: '09:30',           // added
             total: 12.89,
             status: 'preparing',
             cart: [
@@ -90,6 +93,7 @@ function getSampleOrders() {
             lastName: 'Davis',
             phone: '(555) 321-0987',
             date: '2025-01-14',
+            pickupTime: '10:00',           // added
             total: 6.42,
             status: 'completed',
             cart: [
@@ -222,13 +226,20 @@ function showOrders() {
             '<span class="order-status ' + order.status + '">' + capitalize(order.status) + '</span>';
         card.appendChild(header);
 
-        // details
+        // details (add pickup time line)
         var details = document.createElement('div');
         details.className = 'order-details';
         var totalNumber = getTotal(order);
+
+        var pickupLine = '';
+        if (order.pickupTime) {
+            pickupLine = '<br><strong>Pickup:</strong> ' + order.pickupTime;
+        }
+
         details.innerHTML =
             '<strong>Customer:</strong> ' + order.firstName + ' ' + order.lastName + '<br>' +
-            '<strong>Phone:</strong> ' + order.phone + '<br>' +
+            '<strong>Phone:</strong> ' + order.phone +
+            pickupLine + '<br>' +
             '<strong>Total:</strong> $' + totalNumber.toFixed(2);
         card.appendChild(details);
 
@@ -344,7 +355,6 @@ function showOrderDetails(orderNumber) {
     var tax = subtotal * 0.07;
     var total = subtotal + tax;
 
-    // Build simple HTML, but in small pieces
     var html = '';
 
     // header
@@ -353,12 +363,15 @@ function showOrderDetails(orderNumber) {
     html += '<span class="order-status ' + order.status + '">' + capitalize(order.status) + '</span>';
     html += '</div>';
 
-    // customer info
+    // customer info (add pickup time)
     html += '<div class="detail-section">';
     html += '<h3>Customer Information</h3>';
     html += '<div class="detail-row"><span class="detail-label">Name:</span> ' + order.firstName + ' ' + order.lastName + '</div>';
     html += '<div class="detail-row"><span class="detail-label">Phone:</span> ' + order.phone + '</div>';
     html += '<div class="detail-row"><span class="detail-label">Date:</span> ' + order.date + '</div>';
+    if (order.pickupTime) {
+        html += '<div class="detail-row"><span class="detail-label">Pickup Time:</span> ' + order.pickupTime + '</div>';
+    }
     html += '</div>';
 
     // items

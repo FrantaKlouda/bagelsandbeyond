@@ -18,6 +18,10 @@ function showReceipt() {
     html += '<p><strong>Customer:</strong> ' + info.firstName + ' ' + info.lastName + '</p>';
     html += '<p><strong>Phone:</strong> ' + info.phone + '</p>';
     html += '<p><strong>Date:</strong> ' + info.date + '</p>';
+    // show pickup time if saved
+    if (info.pickupTime) {
+        html += '<p><strong>Pickup Time:</strong> ' + info.pickupTime + '</p>';
+    }
     html += '<hr>';
     html += '<p><strong>Items</strong></p>';
     html += '<table>';
